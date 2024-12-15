@@ -22,6 +22,7 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 def keystorePropertiesFile = rootProject.file('key.properties')
@@ -29,11 +30,17 @@ def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     compileSdkVersion 34
-
+    namespace "com.nightmare.adbtools"
     lintOptions {
         disable 'InvalidPackage'
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 
+    // 添加这行解决报错
+    // kotlin { jvmTarget =17 }
     defaultConfig {
         applicationId 'com.nightmare.adbtools'
         minSdkVersion 23
@@ -63,10 +70,11 @@ android {
             minifyEnabled false
         }
     }
-    compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-    }
+    // compileOptions {
+    //     sourceCompatibility = 1.8
+    //     targetCompatibility = 1.8
+    // }
+  
     project.android.applicationVariants.all { variant ->
         variant.outputs.each { output ->
             output.versionCodeOverride = flutterVersionCode.toInteger()

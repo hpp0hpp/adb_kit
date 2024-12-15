@@ -48,8 +48,8 @@ dependencies:
   # multicast on LAN
   multicast:
     git: https://github.com/nightmare-space/multicast
-  file_manager_view:
-    git: https://github.com/nightmare-space/file_manager_view.git
+  file_manager:
+    git: https://github.com/nightmare-space/file_manager.git
   # can receive mdns message
   multicast_dns: ^0.3.0
   # generate QR widget
@@ -102,4 +102,5 @@ flutter:
   assets:
     - assets/
     - CHANGELOG.md
-# dependency_overrides:
+dependency_overrides:
+  image: ^3.1.3
